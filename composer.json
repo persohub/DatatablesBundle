@@ -26,8 +26,8 @@
         "moment/moment": "2.5.1"
     },
     "autoload": {
-        "psr-0": { "Persohub\\DatatablesBundle": "" }
+        "psr-0": { "Sg\\DatatablesBundle": "" }
     },
-    "target-dir": "Persohub/DatatablesBundle"
+    "target-dir": "Sg/DatatablesBundle"
 }
 
