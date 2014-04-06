@@ -1,5 +1,5 @@
 {
-    "name": "sg/datatablesbundle",
+    "name": "persohub/datatablesbundle",
     "type": "symfony-bundle",
     "description": "Symfony2 Datatable Bundle For Doctrine2 Entities",
     "keywords": ["symfony2", "datatable", "grid", "table", "datagrid", "pagination"],
@@ -26,8 +26,8 @@
         "moment/moment": "2.5.1"
     },
     "autoload": {
-        "psr-0": { "Sg\\DatatablesBundle": "" }
+        "psr-0": { "Persohub\\DatatablesBundle": "" }
     },
-    "target-dir": "Sg/DatatablesBundle"
+    "target-dir": "Persohub/DatatablesBundle"
 }
 
