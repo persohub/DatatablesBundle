@@ -15,7 +15,9 @@ use Sg\DatatablesBundle\Column\ColumnBuilder;
 
 use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
-use Symfony\Component\Translation\Translator;
+//use Symfony\Component\Translation\DataCollectorTranslator as Translator;
+//use Symfony\Component\Translation\LoggingTranslator as Translator;
+//use Symfony\Component\Translation\Translator;
 use Exception;
 
 /**
@@ -129,7 +131,7 @@ abstract class AbstractDatatableView implements DatatableViewInterface
      * @param Router     $router               The router service
      * @param array      $defaultLayoutOptions The default layout options
      */
-    public function __construct(TwigEngine $templating, Translator $translator, Router $router, array $defaultLayoutOptions)
+    public function __construct(TwigEngine $templating, $translator, Router $router, array $defaultLayoutOptions)
     {
         $this->templating = $templating;
         $this->translator = $translator;

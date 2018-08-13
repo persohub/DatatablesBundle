@@ -13,30 +13,16 @@ namespace Sg\DatatablesBundle\Column;
 
 use Sg\DatatablesBundle\Column\AbstractColumn as BaseColumn;
 
-use Exception;
-
 /**
- * Class ActionColumn
+ * Class Column
  *
  * @package Sg\DatatablesBundle\Column
  */
-class ActionColumn extends BaseColumn
+class InputColumn extends BaseColumn
 {
-    /**
-     * The action route.
-     *
-     * @var null|string
-     */
-    private $route;
-
-    /**
-     * The action route parameters.
-     *
-     * @var array
-     */
-    private $routeParameters;
-
-    private $routeHash;
+    //-------------------------------------------------
+    // ColumnInterface
+    //-------------------------------------------------
 
     /**
      * An action icon.
@@ -66,11 +52,6 @@ class ActionColumn extends BaseColumn
      */
     private $renderConditions;
 
-
-    //-------------------------------------------------
-    // Ctor.
-    //-------------------------------------------------
-
     /**
      * Ctor.
      *
@@ -80,24 +61,36 @@ class ActionColumn extends BaseColumn
      */
     public function __construct($property = null)
     {
-        if (null != $property) {
-            throw new Exception("The entity's property should be null.");
+        if (null == $property) {
+            throw new Exception("The entity's property can not be null.");
         }
 
         parent::__construct($property);
     }
-
-
-    //-------------------------------------------------
-    // ColumnInterface
-    //-------------------------------------------------
 
     /**
      * {@inheritdoc}
      */
     public function getClassName()
     {
-        return 'action';
+        return 'inputcolumn';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaults()
+    {
+        parent::setDefaults();
+
+        $this->setMRender('render_input');
+        $this->setBSearchable(false);
+        $this->setBSortable(false);
+
+        $this->setIcon(null);
+        $this->setLabel(null);
+        $this->setAttributes(array());
+        $this->setRenderConditions(array());
     }
 
     /**
@@ -107,15 +100,6 @@ class ActionColumn extends BaseColumn
     {
         parent::setOptions($options);
 
-        if (array_key_exists('route', $options)) {
-            $this->setRoute($options['route']);
-        }
-        if (array_key_exists('parameters', $options)) {
-            $this->setRouteParameters($options['parameters']);
-        }
-        if (array_key_exists('hash', $options)) {
-            $this->setRouteHash($options['hash']);
-        }
         if (array_key_exists('icon', $options)) {
             $this->setIcon($options['icon']);
         }
@@ -128,102 +112,6 @@ class ActionColumn extends BaseColumn
         if (array_key_exists('renderif', $options)) {
             $this->setRenderConditions($options['renderif']);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaults()
-    {
-        parent::setDefaults();
-
-        $this->setBSearchable(false);
-        $this->setBSortable(false);
-
-        $this->setRoute(null);
-        $this->setRouteParameters(array());
-        $this->setRouteHash("");
-        $this->setIcon(null);
-        $this->setLabel(null);
-        $this->setAttributes(array());
-        $this->setRenderConditions(array());
-    }
-
-
-    //-------------------------------------------------
-    // Getters && Setters
-    //-------------------------------------------------
-
-    /**
-     * Set route.
-     *
-     * @param null|string $route
-     *
-     * @return $this
-     */
-    public function setRoute($route)
-    {
-        $this->route = $route;
-
-        return $this;
-    }
-
-    /**
-     * Get route.
-     *
-     * @return null|string
-     */
-    public function getRoute()
-    {
-        return $this->route;
-    }
-
-    /**
-     * Set route parameters.
-     *
-     * @param array $parameters
-     *
-     * @return $this
-     */
-    public function setRouteParameters(array $parameters)
-    {
-        $this->routeParameters = $parameters;
-
-        return $this;
-    }
-
-    /**
-     * Get route parameters.
-     *
-     * @return array
-     */
-    public function getRouteParameters()
-    {
-        return $this->routeParameters;
-    }
-
-    /**
-     * Set route hash.
-     *
-     * @param array $parameters
-     *
-     * @return $this
-     */
-    public function setRouteHash($hash)
-    {
-        $this->routeHash = $hash;
-
-        return $this;
-    }
-
-    /**
-     * Get route hash.
-     *
-     * @return array
-     */
-    public function getRouteHash()
-    {
-        return $this->routeHash;
     }
 
     /**
@@ -321,4 +209,5 @@ class ActionColumn extends BaseColumn
     {
         return $this->renderConditions;
     }
+
 }

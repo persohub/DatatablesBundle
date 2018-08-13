@@ -54,6 +54,9 @@ class ColumnFactory implements ColumnFactoryInterface
             case 'action':
                 $this->column = new ActionColumn($property);
                 break;
+            case 'input':
+                $this->column = new InputColumn($property);
+                break;
             case 'array':
                 $this->column = new ArrayColumn($property);
                 break;
@@ -68,6 +71,9 @@ class ColumnFactory implements ColumnFactoryInterface
                 break;
             case 'timeago':
                 $this->column = new TimeagoColumn($property);
+                break;
+            case 'attachment':
+                $this->column = new AttachmentColumn($property);
                 break;
             default:
                 throw new Exception("The {$name} column is not supported.");

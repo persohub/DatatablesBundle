@@ -1,0 +1,33 @@
+{% extends 'SgDatatablesBundle:Column:column.html.twig' %}
+
+{% block data %}
+    "mData": "{{ column.mData }}",
+    "mRender": function(data, type, full) {
+        var routeParameters  = new Array();
+        var attributes = "";
+
+        {% for key, value in column.renderConditions %}
+            if (!full.{{ value }}) return '';
+        {% endfor %}
+        
+        {% for key, value in column.attributes %}
+            attributes += '{{ key }}="{{ value }}" ';
+        {% endfor %}
+
+        var inputfield = '<input name="inputcolumn_{{column.property}}" '+(data?'':'disabled="disabled"')+' class="form-control input-item-data '+(data?'':'disabled')+'" type="number" min="'+(data?1:0)+'" {#max="'+data+'" #}value="'+data+'">';
+
+        {#
+        var url  = "<a ";
+        url += 'href="' + route + '" ';
+        url += attributes + ">";
+        {% if column.icon %}
+            url += '<span class="{{ column.icon }}"></span> {{ column.label }}';
+        {% else %}
+            url += "{{ column.label }}";
+        {% endif %}
+        url += "</a>";
+        #}
+
+        return inputfield;
+    },
+{% endblock %}

@@ -13,7 +13,8 @@ namespace Sg\DatatablesBundle\Datatable\View;
 
 use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
-use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\DataCollectorTranslator as Translator;
+//use Symfony\Component\Translation\Translator;
 use Exception;
 
 /**

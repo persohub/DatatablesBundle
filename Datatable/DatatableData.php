@@ -151,6 +151,8 @@ class DatatableData implements DatatableDataInterface
         if (in_array($column, $metadata->getFieldNames())) {
             $this->selectColumns[($columnTableName?:$metadata->getTableName())][] = $column;
         } else {
+//            dd("Look for: ".$column);
+//            $this->selectColumns[$column] = $column;
             throw new Exception('Exception when parsing the columns.');
         }
 
@@ -196,6 +198,7 @@ class DatatableData implements DatatableDataInterface
             $targetRootIdentifier = array_shift($targetIdentifiers);
 
             if ($column !== $targetRootIdentifier) {
+//                dd($column);
                 $this->addSelectColumn($metadata, $column, $columnTableName);
             }
 
@@ -227,6 +230,7 @@ class DatatableData implements DatatableDataInterface
                 } else {
                     // no association found
                     if ($column !== $this->rootEntityIdentifier) {
+//                        dd($column);
                         $this->addSelectColumn($this->metadata, $column);
                     }
 
@@ -284,6 +288,11 @@ class DatatableData implements DatatableDataInterface
         $this->buildQuery();
 
         $fresults = new Paginator($this->datatableQuery->execute(), true);
+
+        
+//        dd($this->datatableQuery->getQb()->getQuery()->getSQL());
+//        dd($this->datatableQuery->getQb()->getQuery()->getParameters());
+
         $output = array("aaData" => array());
 
         foreach ($fresults as $item) {

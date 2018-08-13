@@ -1,0 +1,10 @@
+{% extends 'SgDatatablesBundle:Column:column.html.twig' %}
+
+{% block data %}
+    "mData": "{{ column.mData }}",
+    {% if column.mRender %}
+        "mRender": function(data, type, full) {
+            return {{ column.mRender }}(data, type, full);
+        },
+    {% endif %}
+{% endblock %}

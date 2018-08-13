@@ -221,8 +221,7 @@ class DatatableQuery
     {
         foreach ($this->selectColumns as $key => $value) {
             // $qb->select('partial comment.{id, title}, partial post.{id, title}');
-//            $this->qb->addSelect('partial ' . $key . '.{' . implode(',', $this->selectColumns[$key]) . '}');
-            $this->qb->addSelect('' . $key . '');
+            $this->qb->addSelect('partial ' . $key . '.{' . implode(',', $this->selectColumns[$key]) . '}');
         }
 
         $this->qb->from($this->entityName, $this->tableName);
@@ -352,7 +351,6 @@ class DatatableQuery
         $query = $this->qb->getQuery();
         $query->setHydrationMode(Query::HYDRATE_ARRAY);
 
-//        dd($query->getArrayResult());
         return $query;
     }
 }
